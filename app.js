@@ -62,17 +62,105 @@ function NBAPlayer (name, team, threePoinShooter) {
     this.name = name;
     this.team = team;
     this.threePoinShooter = threePoinShooter;
+    this.intro = function() {
+        console.log("Hi, my name is " + this.name);
+    }
 }
 
 let steph = new NBAPlayer('Steph Curry', 'Warriors', true);
 let lebron = new NBAPlayer('Lebron James', 'Lakers', true);
+let james = new NBAPlayer('James Harden', 'Rockets', true);
 console.log(steph);
 console.log(steph.name);
+steph.intro();
 
-function CarBrands (name, inUsa, type) {
-    this.name = name;
-    this.inUsa = inUsa;
-    this.type = type;
+// function CarBrands (name, inUsa, type) {
+//     this.name = name;
+//     this.inUsa = inUsa;
+//     this.type = type;
+// }
+// let tesla = new CarBrands ('Tesla', true, 'Electric');
+// let peugeot = new CarBrands ('Peugeot', false, 'Gas');
+
+class Car {
+    constructor(year, make, model, color) {
+        this.year = year;
+        this.make = make;
+        this.model = model;
+        this.color = color;
+
+    }
+    drive() {
+        console.log('Vroom');
+    }
 }
-let tesla = new CarBrands ('Tesla', true, 'Electric');
-let peugeot = new CarBrands ('Peugeot', false, 'Gas');
+
+let tesla = new Car(2020, 'Tesla', 'Model S', 'red');
+console.log(tesla);
+
+class GithubProfile {
+    constructor(username, name, url) {
+        this.username = username;
+        this.name = name;
+        this.url = url;
+
+    }
+    intro () {
+        console.log(`My name is ${this.name} and my user name is @${this.username} `)
+    }
+}
+
+fetch('https://api.github.com/users/mgustavob')
+.then(response => {
+    return response.json();
+
+})
+.then(data => {
+    console.log(data);
+    let gitHubUrl = data.url;
+    let gitHubUsername = data.login;
+    let gitHubName = data.name;
+    let martin = new GithubProfile(gitHubUsername, gitHubName, gitHubUrl)
+    console.log(martin);
+    martin.intro();
+
+})
+fetch('https://api.github.com/users/lizzwest')
+.then(response => {
+    return response.json();
+
+})
+.then(data => {
+    console.log(data);
+    let gitHubUrl = data.url;
+    let gitHubUsername = data.login;
+    let gitHubName = data.name;
+    let lizz = new GithubProfile(gitHubUsername, gitHubName, gitHubUrl)
+    console.log(lizz);
+    lizz.intro();
+
+})
+
+
+let isMomHappy = false;
+
+// Promise
+let willIGetNewPhone = new Promise(
+    function (resolve, reject) {
+        if (isMomHappy) {
+            let phone = {
+                brand: 'Samsung',
+                color: 'black'
+            };
+            resolve(phone); // fulfilled
+        } else {
+            let reason = new Error('mom is not happy');
+            reject(reason); // reject
+        }
+
+    }
+);
+
+willIGetNewPhone.then(result => {
+    console.log(result);
+})
