@@ -142,7 +142,7 @@ fetch('https://api.github.com/users/lizzwest')
 })
 
 
-let isMomHappy = false;
+let isMomHappy = true;
 
 // Promise
 let willIGetNewPhone = new Promise(
@@ -164,3 +164,23 @@ let willIGetNewPhone = new Promise(
 willIGetNewPhone.then(result => {
     console.log(result);
 })
+
+async function printUsers() {
+    const endpoint = 'http://jsonplaceholder.typicode.com/users'
+    let users = await fetch(endpoint).then(res => res.json());
+    console.log(users);
+}
+
+printUsers();
+
+
+// set up fetch using await
+// grab login name
+// print login name
+
+async function printFacebook() {
+    let facebookEndpoint = 'https://api.github.com/users/facebook'
+    let login = await fetch(facebookEndpoint).then(res => res.json());
+    console.log(login);
+
+}
